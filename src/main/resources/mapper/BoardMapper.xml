@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.BoardMapper">
+	 
+    <select id="getBoardList" parameterType="int" resultType="BoardDTO">
+		select * from board b inner join user_info u on b.user_id=u.user_id where board_category_num = ${board_category_num}
+    </select>
+    
+    <select id="getPostList" parameterType="int" resultType="BoardDTO">
+    	<![CDATA[
+    	select * from 
+    		(
+    		select * from board where board_category_num = ${board_category_num} order by board_num desc
+			) 
+		where rownum <= 11
+		]]>
+    </select>
+    
+    <select id="getTotalCount" parameterType="String" resultType="int">
+    	select count(*) from board where board_category_num = #{board_category_num}
+    </select>
+    
+    
+    <select id="getListWithPaging" parameterType="java.util.Map" resultType="BoardDTO">
+        <![CDATA[
+		
+		select * from(           
+	    	select rownum rn, board.* from	
+	            (select * from board b inner join user_info u on b.user_id=u.user_id where board_category_num = ${board_category_num} order by group_num desc, orders)
+	            board where rownum <= ${pageNum} * ${amount}
+	            )
+        where rn > (${pageNum} - 1) * ${amount}
+		]]>     
+    </select>
+
+	<insert id="write" parameterType="BoardDTO">
+		insert into board (
+	        board_num,
+	        user_id,
+	        subject,
+	        content, 
+	        group_num,
+	        board_category_num,
+	        pwd
+	    
+	    ) values (
+	        seq_board.nextval,
+	        #{user_name},
+	        #{subject},
+	        #{content},
+	        seq_board.currval,
+	        #{board_category_num}
+	        #{pwd}
+	    )
+	</insert>
+	
+	<insert id="writeSelectKey" parameterType="BoardDTO">
+		<selectKey keyProperty="board_num" order="BEFORE" resultType="int">
+			select seq_board.nextval from dual
+		</selectKey>
+		
+		insert into board (
+	        board_num,
+	        user_id,
+	        subject,
+	        content, 
+	        group_num,
+	        board_category_num,
+	        pwd
+	    
+	    ) values (
+	        #{board_num},
+	        #{user_name},
+	        #{subject},
+	        #{content},
+	        seq_board.currval,
+	        #{board_category_num},
+	        #{pwd}
+	    )
+	</insert>
+	
+	<update id="modify" parameterType="BoardDTO">
+		update board set user_name = #{user_name}, subject = #{subject}, content = #{content}, updatedate = sysdate where board_num = #{board_num}
+	</update>
+	
+	<select id="get" parameterType="int" resultType="BoardDTO">
+		select * from board b inner join user_info u on b.user_id=u.user_id  where board_num = #{board_num}
+	</select>
+	
+	
+	
+	<insert id="boardReplyWrite" parameterType="BoardDTO">
+		begin
+			update board set orders = orders + 1 where group_num = #{group_num} and orders > #{orders}; 
+			
+			insert into board (
+				board_num,
+		        user_name,
+		        subject,
+		        content, 
+		        group_num,
+		        layer,
+		        orders,
+		        board_category_num,
+		        parant_num,
+		        pwd
+			) values(
+				seq_board.nextval,
+				#{user_name},
+				#{subject},
+				#{content},
+				#{group_num},
+				#{layer} + 1,
+				#{orders} + 1,
+				#{board_category_num},
+				#{parant_num},
+				#{pwd}
+			);
+			update board set reply=reply+1 where board_num=#{parant_num};	
+		end;	
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		begin
+			delete reply where board_num = ${board_num};
+			delete board where board_num = ${board_num};
+		end;	
+	</delete>
+	
+	<select id="getReview" parameterType="int" resultType="BoardDTO">
+	select * from board b
+inner join user_info u
+on b.user_id=u.user_id
+where b.board_category_num=4 and b.product_number=#{product_number} order by board_num desc
+	</select>
+	
+	<select id="getNewPost" parameterType="int" resultType="BoardDTO">
+	
+    		select * from board where board_category_num = ${board_category_num} and board_num=(select max(board_num) from board where board_category_num = ${board_category_num})
+		
+	</select>
+</mapper>

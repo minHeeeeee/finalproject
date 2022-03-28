@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file.mapper.FileMapper">
+	 
+    <insert id="boardFileInsert" parameterType="FileDTO">
+		INSERT into BoardFile (boardfile_id, uuid, uploadPath, fileName, board_Num) 
+		VALUES (seq_boardfile_id.nextval, #{uuid}, #{uploadPath}, #{fileName}, #{board_Num})
+	</insert>
+
+	<delete id="boardFiledelete">
+		delete from BoardFile where uuid = #{uuid}
+	</delete>	
+
+	<delete id="boardFiledeleteAll">
+		delete BoardFile where board_Num = #{board_Num}
+	</delete>
+
+	<select id="findByBoardNum" parameterType="int" resultType="FileDTO">
+		select * from BoardFile where board_Num = #{board_Num} order by boardfile_id
+	</select>
+	<select id="findByBoardNumOne" parameterType="int" resultType="FileDTO">
+		select * from BoardFile where board_Num = #{board_Num} and boardFile_id=(select min(boardfile_id) from boardfile where board_num=#{board_Num})
+	</select>
+
+</mapper>

@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+
+body {
+  font-family: "Sunflower", sans-serif;
+}
+
+
+.main section{
+	display:flex;
+	border:solid 1px black;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.main img{
+	border-left:solid 1px black;
+	border-right:solid 1px black;
+	border-bottom: solid 1px black;
+	width:100%;
+}
+a{
+	cursor: pointer;
+}
+
+marquee span{
+    font-size: 68px;
+    font-weight: bold;
+}
+
+#circle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vw;
+    width: 40vw;
+    font-family: "RTB", Helvetica Neue, Helvetica, Noto Sans KR, sans-serif;
+    font-size: 30vw;
+    font-weight: bold;
+    border-radius: 50%;
+    border: 4vw solid black;
+    animation: abc 2.5s linear infinite;
+    margin:50px auto;
+}
+@keyframes abc {
+    100% {
+      transform: rotateY(360deg);
+    }
+}
+img{
+	opacity:1;
+	transition:opacity 0.3s;
+}
+img:hover{
+	color:rgb(192,192,192);
+	opacity:0.2;
+}

@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+
+body{
+  font-family: "Sunflower", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#pwd_alertDiv {
+  margin: auto;
+  width: 680px;
+}
+
+#pwd_alertDiv p {
+  font-size: 11pt;
+}
+
+#pwd_alertDiv #information{
+font-size:11pt;
+}
+
+#pwd_alertDiv input[type="button"] {
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#pwd_alertDiv input[type="button"]:hover {
+  color: gray;
+}

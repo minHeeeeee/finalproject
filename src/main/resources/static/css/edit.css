@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+
+#body {
+  font-family: "Sunflower", sans-serif;
+}
+
+#postbtn:hover {
+  cursor: pointer;
+  color: gray;
+}
+
+#editbtn {
+  background-color: white;
+  border: 1px black solid;
+  width: 320px;
+  height: 40px;
+  padding: 0.5%;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+
+  margin: 50px auto 0px auto;
+}
+
+#deletebtn {
+  background-color: white;
+  border: 1px rgb(179, 172, 172) solid;
+  width: 320px;
+  height: 40px;
+  padding: 0.5%;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  color: rgb(179, 172, 172);
+
+  margin: 20px auto 0px auto;
+}
+
+#editDiv{
+	display:flex;
+	justify-content: center;
+	margin:100px auto;
+}
+.swal2-actions{
+    display: flex;
+    z-index: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around !important;
+    width: 100%;
+    margin: 1.25em auto 0;
+}

@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+
+#body {
+  font-family: "Sunflower", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#findPwdBtn {
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#rePwdBtn {
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#cancel {
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+label {
+  font-size: 9pt;
+}
+
+#findPwdDiv {
+  margin: 100px auto;
+  padding: 10px;
+}
+

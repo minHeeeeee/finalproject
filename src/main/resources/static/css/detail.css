@@ -1,0 +1,27 @@
+#detailDiv div{
+	padding:5px;
+}
+#detailDiv img{
+	border:none;
+}
+.tab-content table tr{
+	border-bottom: 1px solid black;
+}
+
+.tab-content table{
+	width:80%
+}
+#reviewBoardDiv span{
+	float:right;
+}
+#reviewBoardDiv span a{
+	margin-left:20px;
+}
+#reviewTableDiv{
+	display:none;
+	
+}
+#reviewBoardDiv{
+	margin:20px auto;
+	
+}

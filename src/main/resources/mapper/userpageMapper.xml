@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userPageSQL">
+	<select id="loginOk" parameterType="java.util.Map"
+		resultType="user">
+		select * from user_info where user_id=#{user_id}
+	</select>
+	<insert id="joinOk" parameterType="user">
+		insert into user_info
+		(user_id, user_pwd, name, zipcode, addr1, addr2, tel, phone, email,
+		email_check, user_insertdate) values(#{user_id}, #{user_pwd}, #{name},
+		#{zipcode}, #{addr1}, #{addr2}, #{tel}, #{phone}, #{email},
+		#{email_check}, sysdate)
+	</insert>
+	<update id="editOk" parameterType="user">
+		update user_info set
+		user_pwd=#{user_pwd}, zipcode=#{zipcode}, email=#{email}, addr1=#{addr1}, addr2=#{addr2}, phone=#{phone}, tel=#{tel} where user_id=#{user_id}
+	</update>
+	<delete id="deleteOk" parameterType="String">
+		delete user_info where user_id=#{user_id} <!-- MySQL에 꼬오옥 from 이 있어야 한다. -->
+	</delete>
+	<!--아이디 중복체크 -->
+	<select id="checkId" parameterType="String" resultType="user">
+		select * from user_info where user_id=#{user_id}
+	</select>
+	<!-- 이메일로 아이디 찾기 -->
+	<select id="findIdEmail" parameterType="java.util.Map" resultType="user">
+		select * from user_info where email=#{email} and name=#{name}
+	</select>
+	<!-- 핸드폰으로 아이디 찾기 -->
+	<select id="findIdPhone" parameterType="java.util.Map" resultType="user">
+		select * from user_info where phone=#{phone} and name=#{name}
+	</select>
+	<!-- 이메일로 비번찾기 -->
+	<select id="findPwdEmail" parameterType="java.util.Map" resultType="user">
+	   select * from user_info where email=#{email} and name=#{name} and user_id=#{user_id}
+	</select>
+	<!-- 핸드폰으로 비번찾기 -->
+	<select id="findPwdPhone" parameterType="java.util.Map" resultType="user">
+	   select * from user_info where phone=#{phone} and name=#{name} and user_id=#{user_id}
+   </select>
+	<update id="updatePwd" parameterType="java.util.Map">
+		update user_info set user_pwd=#{user_pwd},rank_num=#{rank_num} where user_id=#{user_id}
+	</update>
+	<select id="getAddresses" parameterType="String" resultType="userpage.bean.AddressDTO">
+		select * from user_addresses where user_id=#{user_id}
+	</select>
+	<insert id="addNew" parameterType="java.util.Map">
+	insert into user_addresses(user_id, zipcode,addr1,addr2,addr_name,user_name,phone,addr_number)
+								values(#{user_id}
+									 ,#{zipcode}
+									 ,#{addr1}
+							 		,#{addr2}
+							 		,#{addr_name}
+									 ,#{user_name}
+							 		,#{phone}
+							 		,seq_addresses.nextval)
+	
+	</insert>
+	<select id="getEdit" parameterType="String" resultType="userpage.bean.AddressDTO">
+	select * from user_addresses where addr_number=#{addr_number}
+	</select>
+	<update id="addEdit" parameterType="java.util.Map">
+	update user_addresses set zipcode=#{zipcode}
+									,addr1=#{addr1}
+									,addr2=#{addr2}
+									,addr_name=#{addr_name}
+									,user_name=#{user_name}
+									,phone=#{phone}
+									 where addr_number=#{addr_number}
+	</update>
+	<delete id="delEdit" parameterType="String">
+	delete from user_addresses where addr_number=#{addr_number}
+	
+	</delete>
+	
+	<select id="getMenuImg" resultType="userpage.bean.MenuImgDTO">
+		select * from menu_imagefile m
+inner join product_imagefile p
+on m.file_number=p.file_number
+	</select>
+	
+	
+	<!-- productList -->
+	<select id="getList" parameterType="java.util.Map"
+		resultType="userpage.bean.ListDTO">
+		select * from
+		(select rownum rn,tt.* from
+		(select * from
+		(select
+		p.product_number,
+		p.product_name,
+		p.product_price,
+		pimg.stored_thumbnail,
+		row_number() over(partition by p.product_number order by p.product_date desc) ind
+		from product_category pcate
+		inner join
+		product_connect pconn
+		on
+		pconn.category_code=pcate.category_code
+		inner join
+		product p
+		on
+		pconn.product_number=p.product_number
+		inner join
+		product_imagefile pimg
+		on
+		p.product_number=pimg.product_number
+		where category_name like #{category}||'%' order by p.product_date desc)
+		where ind=1)
+		tt)
+		where rn between #{startNum} and #{endNum}
+	</select>
+	<select id="getSearchTotalA" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from
+		(select
+		p.product_number,
+		p.product_name,
+		p.product_price,
+		pimg.stored_thumbnail,
+		row_number() over(partition by p.product_number order by p.product_date desc) ind
+		from product_category pcate
+		inner join
+		product_connect pconn
+		on
+		pconn.category_code=pcate.category_code
+		inner join
+		product p
+		on
+		pconn.product_number=p.product_number
+		inner join
+		product_imagefile pimg
+		on
+		p.product_number=pimg.product_number
+		where category_name like #{category}||'%' order by p.product_date desc)
+		where ind=1
+	</select>
+	<select id="getDetailImg" parameterType="int" resultType="userpage.bean.Product_ImageFileDTO">
+		select * from product_imagefile where product_number=#{product_number}
+	</select>
+	<select id="getProduct" parameterType="int" resultType="userpage.bean.ProductDTO">
+		select * from product where product_number=#{product_number}
+	</select>
+	<select id="getSizes" parameterType="int" resultType="userpage.bean.Product_SortDTO">
+		select * from product_sort where product_number=#{product_number}
+	</select>
+	<select id="getSearchList" parameterType="java.util.Map"
+		resultType="userpage.bean.ListDTO">
+		select * from
+		(select rownum rn,tt.* from
+		(select * from
+		(select
+		p.product_number,
+		p.product_name,
+		p.product_price,
+		pimg.stored_thumbnail,
+		row_number() over(partition by p.product_number
+		order by p.product_date desc) ind
+		from product_category pcate
+		inner join
+		product_connect pconn
+		on
+		pconn.category_code=pcate.category_code
+		inner
+		join
+		product p
+		on
+		pconn.product_number=p.product_number
+		inner join
+		product_imagefile pimg
+		on
+		p.product_number=pimg.product_number
+		where
+		product_name like '%'||#{product_name}||'%' order by p.product_date desc)
+		where ind=1)
+		tt)
+		<!-- where rn between #{startNum} and #{endNum} -->
+	</select>
+	<select id="getSearchTotalB" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from
+		(select
+		p.product_number,
+		p.product_name,
+		p.product_price,
+		pimg.stored_thumbnail,
+		row_number()
+		over(partition by p.product_number order by p.product_date desc) ind
+		from product_category pcate
+		inner join
+		product_connect pconn
+		on
+		pconn.category_code=pcate.category_code
+		inner join
+		product p
+		on
+		pconn.product_number=p.product_number
+		inner join
+		product_imagefile pimg
+		on
+		p.product_number=pimg.product_number
+		where product_name like
+		'%'||#{product_name}||'%' order by p.product_date desc)
+		where ind=1
+	</select>
+	<select id="cartList" parameterType="String" resultType="userpage.bean.CartListDTO">
+	select
+      *
+      from
+      (
+          select c.*,
+              row_number() over(PARTITION BY s.product_sort_num ORDER BY s.product_sort_num  desc) as num,
+              s.product_number, s.product_size, c.user_id AS cartUserId, c.product_count AS productCount,
+                 p.product_name, p.product_price,
+               i.stored_thumbnail
+          from cart c
+                inner join product_sort s
+                     on s.product_sort_num = c.product_sort_number
+              inner join product p
+                  on s.product_number = p.product_number
+              inner join product_imagefile i
+                  on p.product_number = i.product_number
+                 
+              where c.user_id = #{user_id}
+               )
+      where num = 1
+	</select>
+	<delete id="deleteCart" parameterType="int">
+		delete cart where cart_number = #{cart_number} 
+	</delete>
+	<insert id="addCart" parameterType="userpage.bean.CartListDTO">
+		insert into cart values(#{product_sort_number},#{user_id},1,cart_seq.nextval)
+	</insert>
+	<select id="getQuickorder" parameterType="int" resultType="userpage.bean.CartListDTO">
+	select tt.* from(select s.product_size,p.product_price,p.product_name,i.stored_thumbnail,row_number() over(PARTITION BY s.product_sort_num ORDER BY s.product_sort_num  desc) as num 
+from product_sort s
+inner join product p
+on s.product_number=p.product_number
+inner join product_imagefile i
+on i.product_number=s.product_number
+where s.product_sort_num=#{product_sort_num}) tt
+where num=1
+	</select>
+</mapper>

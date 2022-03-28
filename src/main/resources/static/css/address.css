@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+body {
+  font-family: "Sunflower", sans-serif;
+}
+
+#addressDiv #addbook {
+  width: 80vw;
+  height: 10vh;
+
+  margin: auto;
+  margin-top: 60px;
+}
+
+#addressDiv #addcontent {
+  width: 80vw;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin: auto;
+  padding: 20px 0px 20px 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#addressDiv {
+  padding: 10px;
+  margin:100px 0;
+}
+
+#addressDiv #addBtn {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+#addressDiv input[type="button"] {
+  border-color: black;
+  width: 150px;
+  height: 30px;
+  font-size: 9pt;
+  font-weight: bold;
+  margin: 10px;
+  cursor:pointer;
+}
+#addressDiv #DELETEbtn {
+  background-color: white;
+}
+#addressDiv #ADDBtn {
+  background-color: black;
+  color: white;
+}
+
+#addressDiv a {
+  color: black;
+  font-size: 9pt;
+  font-weight: bold;
+  display: flex;
+	cursor:pointer;
+  justify-content: flex-end;
+}
+
+#addressDiv a:hover {
+  color: rgb(177, 171, 171);
+  transition: ease 0.5s;
+}
+#addressDiv span {
+  display: block;
+}
+
+#addressDiv #address1 {
+  width: 95%;
+}

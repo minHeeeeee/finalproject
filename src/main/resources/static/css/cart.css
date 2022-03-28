@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap");
+body {
+  font-family: "Sunflower", sans-serif;
+}
+
+#cartok {
+  display:flex;
+  flex-wrap:wrap;
+  padding: 10px;
+  margin-bottom: 100px;
+}
+#cartok ul {
+  margin: 0px;
+  padding: 0px;
+}
+#cartok #top {
+  border-bottom: solid black 3px;
+  margin-top: 10vh;
+  padding: 0px;
+  display: flex;
+  text-align: end;
+}
+#cartok #top h3 {
+  margin: 20px;
+}
+#cartok #mid {
+  padding: 3vh;
+}
+#cartok .product {
+  width: 100%;
+  border-bottom: 3px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+#cartok .product span {
+  display: block;
+}
+#cartok .detail {
+  width: 80%;
+  display: flex;
+}
+#cartok .img {
+  width: 90px;
+  height: 135px;
+}
+#cartok .img img{
+	border:none;
+}
+#cartok .detailDiv {
+  width: 75%;
+  padding-left: 20px;
+}
+#cartok .detailDiv span:nth-child(odd) {
+  font-weight: bold;
+}
+#cartok .detailDiv span:nth-child(2) {
+  color: gray;
+  font-weight: bold;
+  font-size: small;
+  margin-bottom: 3%;
+}
+#cartok .number {
+  width: 30%;
+  height: fit-content;
+  justify-content: space-around;
+  font-weight: bold;
+  font-size: 10pt;
+}
+#cartok .number span {
+  font-weight: bold;
+  color: black;
+}
+#cartok .remove {
+  color: gray;
+  cursor: pointer;
+}
+#cartok .remove:hover {
+  color: rgba(187, 189, 188, 0.822);
+}
+#cartok #side {
+	
+  padding: 3vh;
+}
+#cartok #total {
+  width: 400px;
+  height: 100%;
+}
+
+#cartok #total span {
+  color: gray;
+}
+
+#cartok #total label {
+  color: gray;
+  font-size: 10pt;
+}
+
+#cartok a {
+  color: black;
+  text-decoration: none;
+  transition: ease 0.5s;
+}
+#cartok a:hover {
+  color: rgb(185, 184, 184);
+}
+#cartok label {
+  display: inline;
+}
+
+#cartok #totallabel {
+  font-size: 11pt;
+  font-weight: bold;
+}
+#noCart {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+#noCart a {
+  color: gray;
+  font-size: 9pt;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}

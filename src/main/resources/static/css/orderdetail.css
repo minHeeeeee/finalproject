@@ -1,0 +1,151 @@
+
+#orderdetailDiv {
+  margin: 100px auto ;
+  padding: 10px;
+}
+
+#orderdetailDiv h3 {
+  margin: 40px 0px;
+  display: block;
+  width:100%;
+}
+
+#orderdetailDiv label {
+  color: gray;
+  font-size: 10pt;
+}
+#orderdetailDiv .youcartDiv {
+  width: 100%;
+  border-bottom: 3px solid black;
+  padding: 20px 0px;
+  font-size: 11pt;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+/* .youcartDiv img {
+  width: 100px;
+  height: 150px;
+  border: solid 1px black;
+} */
+.youcartDiv img {
+  width: 100%;
+  border:none;
+} 
+
+/* .youcartDiv div {
+  width: 150px;
+  height: 100px;
+} */
+
+/* .youcartDiv .youcartName {
+  width: 300px;
+} */
+
+.youcartName span {
+  color: gray;
+  margin-left: 20px;
+}
+
+#carttotal {
+  height: 30vh;
+  width: 100%;
+  border-bottom: 3px solid black;
+  padding: 20px 0px;
+  margin-bottom: 100px;
+}
+
+#carttotal #totalamount {
+  display: block;
+  font-size: 10pt;
+  padding: 5px 0px;
+}
+
+#carttotal #totallabel {
+  padding: 20px 0px;
+  color: gray;
+  font-size: 11pt;
+}
+#carttotal #totallabel label {
+  padding-right: 25px;
+}
+
+#orderinformation input {
+  margin: 9px 0px;
+}
+
+#orderinformation button {
+  border: none;
+  background-color: white;
+  font-size: 9pt;
+  font-weight: bold;
+}
+
+#orderinformation button:hover {
+  color: rgb(182, 175, 175);
+  transition: ease 0.5s;
+}
+
+#orderinformation {
+  margin-bottom: 100px;
+}
+
+#shippinginformation {
+  margin-bottom: 100px;
+}
+#shippinginformation textarea {
+  width: 100%;
+  height: 15vh;
+}
+
+#shippinginformation input {
+  margin: 9px 0px;
+}
+
+#shippinginformation button {
+  border: none;
+  background-color: white;
+  font-size: 9pt;
+  font-weight: bold;
+}
+
+#shippinginformation button:hover {
+  color: rgb(182, 175, 175);
+  transition: ease 0.5s;
+}
+
+#point {
+  margin-bottom: 100px;
+}
+#leftright {
+  display: flex;
+  margin-top: 80px;
+}
+
+#payment #leftDiv {
+  width: 50%;
+  height: 20vh;
+}
+
+#payment #rightDiv {
+  width: 50%;
+  height: 20vh;
+}
+#payment button {
+  width: 100%;
+  height: 5vh;
+  background-color: white;
+  font-weight: bold;
+}
+
+#payment button:hover {
+  color: rgb(182, 175, 175);
+  transition: ease 0.5s;
+}
+#payment label {
+  display: block;
+  margin-bottom: 10px;
+}
+#payment span {
+  font-size: 11pt;
+}
